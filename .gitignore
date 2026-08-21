@@ -1,23 +1,10 @@
-# OS files
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Editor
-.vscode/
-.idea/
-*.suo
-*.user
-
-# Logs
-*.log
-
-# Python server artifacts
-__pycache__/
-*.pyc
-
-# Node (if backend adds node later)
 node_modules/
 dist/
+*.log
+
+# Python / Backend
+__pycache__/
+venv/
+venv2/
+*.pyc
 .env
-.env.local

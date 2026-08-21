@@ -1,0 +1,335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #020408;
+    color: #e0f0ff;
+    font-family: 'Exo 2', sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020408;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00f5ff40;
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00f5ff80;
+  }
+}
+
+@layer components {
+  /* ─── Glass Cards ─── */
+  .glass-card {
+    @apply relative rounded-xl border overflow-hidden;
+    background: rgba(10, 21, 32, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: rgba(0, 245, 255, 0.12);
+    box-shadow:
+      0 0 0 1px rgba(0, 245, 255, 0.05),
+      inset 0 1px 0 rgba(0, 245, 255, 0.08),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 245, 255, 0.03) 0%,
+      transparent 50%,
+      rgba(191, 0, 255, 0.03) 100%
+    );
+    pointer-events: none;
+  }
+
+  .glass-card-purple {
+    @apply glass-card;
+    border-color: rgba(191, 0, 255, 0.15);
+    box-shadow:
+      0 0 0 1px rgba(191, 0, 255, 0.06),
+      inset 0 1px 0 rgba(191, 0, 255, 0.1),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+
+  .glass-card-green {
+    @apply glass-card;
+    border-color: rgba(57, 255, 20, 0.15);
+    box-shadow:
+      0 0 0 1px rgba(57, 255, 20, 0.06),
+      inset 0 1px 0 rgba(57, 255, 20, 0.1),
+      0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+
+  /* ─── Neon Text ─── */
+  .neon-text-cyan {
+    color: #00f5ff;
+    text-shadow:
+      0 0 10px rgba(0, 245, 255, 0.9),
+      0 0 20px rgba(0, 245, 255, 0.6),
+      0 0 40px rgba(0, 245, 255, 0.3);
+  }
+
+  .neon-text-purple {
+    color: #bf00ff;
+    text-shadow:
+      0 0 10px rgba(191, 0, 255, 0.9),
+      0 0 20px rgba(191, 0, 255, 0.6),
+      0 0 40px rgba(191, 0, 255, 0.3);
+  }
+
+  .neon-text-green {
+    color: #39ff14;
+    text-shadow:
+      0 0 10px rgba(57, 255, 20, 0.9),
+      0 0 20px rgba(57, 255, 20, 0.6),
+      0 0 40px rgba(57, 255, 20, 0.3);
+  }
+
+  .neon-text-pink {
+    color: #ff0080;
+    text-shadow:
+      0 0 10px rgba(255, 0, 128, 0.9),
+      0 0 20px rgba(255, 0, 128, 0.6),
+      0 0 40px rgba(255, 0, 128, 0.3);
+  }
+
+  /* ─── Neon Borders / Glows ─── */
+  .neon-border-cyan {
+    border-color: rgba(0, 245, 255, 0.5);
+    box-shadow:
+      0 0 10px rgba(0, 245, 255, 0.3),
+      inset 0 0 10px rgba(0, 245, 255, 0.05);
+  }
+
+  .neon-border-purple {
+    border-color: rgba(191, 0, 255, 0.5);
+    box-shadow:
+      0 0 10px rgba(191, 0, 255, 0.3),
+      inset 0 0 10px rgba(191, 0, 255, 0.05);
+  }
+
+  .neon-glow-cyan {
+    box-shadow:
+      0 0 20px rgba(0, 245, 255, 0.4),
+      0 0 60px rgba(0, 245, 255, 0.15);
+  }
+
+  .neon-glow-purple {
+    box-shadow:
+      0 0 20px rgba(191, 0, 255, 0.4),
+      0 0 60px rgba(191, 0, 255, 0.15);
+  }
+
+  /* ─── Glitch Effect ─── */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch-text:hover::before,
+  .glitch-text:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-text:hover::before {
+    color: #00f5ff;
+    animation: glitch-before 0.3s cubic-bezier(.25,.46,.45,.94) both;
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+    transform: translate(-3px, -1px);
+  }
+
+  .glitch-text:hover::after {
+    color: #ff0080;
+    animation: glitch-after 0.3s cubic-bezier(.25,.46,.45,.94) both;
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    transform: translate(3px, 1px);
+  }
+
+  /* ─── Scanline overlay ─── */
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* ─── Frequency Bars ─── */
+  .freq-bar {
+    @apply rounded-sm origin-bottom;
+    min-height: 4px;
+  }
+
+  /* ─── Ticker ─── */
+  .ticker-wrap {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* ─── Bento Grid ─── */
+  .bento-item {
+    @apply glass-card transition-all duration-300 cursor-pointer;
+  }
+
+  .bento-item:hover {
+    transform: scale(1.02) translateY(-2px);
+    border-color: rgba(0, 245, 255, 0.35);
+    box-shadow:
+      0 0 30px rgba(0, 245, 255, 0.2),
+      0 0 60px rgba(0, 245, 255, 0.05),
+      inset 0 1px 0 rgba(0, 245, 255, 0.15),
+      0 16px 48px rgba(0, 0, 0, 0.7);
+  }
+
+  /* ─── Nav active indicator ─── */
+  .nav-tab-active {
+    @apply neon-text-cyan;
+    border-bottom: 1px solid #00f5ff;
+  }
+
+  /* ─── Animated gradient bg ─── */
+  .cyber-gradient {
+    background: radial-gradient(
+        ellipse at 20% 50%,
+        rgba(191, 0, 255, 0.08) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 80% 20%,
+        rgba(0, 245, 255, 0.06) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 60% 80%,
+        rgba(57, 255, 20, 0.04) 0%,
+        transparent 50%
+      ),
+      #020408;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Orbitron', monospace;
+  }
+
+  .font-mono-cyber {
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .text-gradient-cyber {
+    background: linear-gradient(135deg, #00f5ff 0%, #bf00ff 50%, #ff0080 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-green {
+    background: linear-gradient(135deg, #39ff14 0%, #00f5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ─── Keyframes not in Tailwind ─── */
+@keyframes glitch-before {
+  0%   { transform: translate(0); }
+  25%  { transform: translate(-4px, -1px); }
+  50%  { transform: translate(3px, 2px); }
+  75%  { transform: translate(-2px, 1px); }
+  100% { transform: translate(-3px, -1px); }
+}
+
+@keyframes glitch-after {
+  0%   { transform: translate(0); }
+  25%  { transform: translate(4px, 1px); }
+  50%  { transform: translate(-3px, -2px); }
+  75%  { transform: translate(2px, -1px); }
+  100% { transform: translate(3px, 1px); }
+}
+
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-pulse-line {
+  animation: pulse-line 2s ease-in-out infinite;
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes tickerSlide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes tickerSlideReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes pulseAnim {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 14px currentColor; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+@keyframes radarRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes floatDrift {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(1.5deg); }
+  100% { transform: translateY(8px) rotate(-1.5deg); }
+}

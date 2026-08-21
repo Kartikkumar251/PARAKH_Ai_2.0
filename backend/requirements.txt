@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+torch
+torchvision
+onnx
+onnx2pytorch
+opencv-python
+numpy
